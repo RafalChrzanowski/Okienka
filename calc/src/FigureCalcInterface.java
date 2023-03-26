@@ -66,8 +66,7 @@ public class FigureCalcInterface implements  UserInterface{
     {
         System.out.printf("You have chosen a regular prism, choose a figure in the base:\n");
         System.out.printf("1 - Square\n");
-        System.out.printf("2 - Circle\n");
-        System.out.printf("3 - Triangle\n");
+        System.out.printf("2 - Triangle\n");
         Figure userBase = scanBase();
         System.out.printf("Enter the height of the prism:\n");
         Prism userPrism = new Prism(userBase, scanner.nextInt());
@@ -88,17 +87,12 @@ public class FigureCalcInterface implements  UserInterface{
                     break;
 
                 case 2:
-                    System.out.printf("You choose circle, pass a r: \n");
-                    userBase = new Circle(scanner.nextInt());
-                    isSet = true;
-                    break;
-                case 3:
                     System.out.printf("You choose Triangle, pass the sides: \n");
                     userBase = new Triangle(scanner.nextInt(), scanner.nextInt(), scanner.nextInt());
                     isSet = true;
                     break;
                 default:
-                    System.out.printf("Error,choose a number from 1 to 3");
+                    System.out.printf("Error,choose a number from 1 to 2");
                     break;
             }
         }

@@ -17,26 +17,25 @@ public class Student implements Printable, Comparable<Student>{
     }
     @Override
     public void print(){
-        System.out.println("Name " + firstName + " LastName " + lastName + "\n" + "Year of Birth " + yearOfBirth +"\n" + "Student Condition: " + studentStatus + " Points: " + points + "\n" + "Email: " + email);
+        System.out.println("Name " + firstName + " LastName " + lastName + "\n" + "Year of Birth " + yearOfBirth +"\n" + "Student Condition: " + studentCondition + " Points: " + points + "\n" + "Email: " + email);
     }
-    @Override
+
     public String getName() {
         return lastName;
     }
-    @Override
+
     public String getFirstName() {
         return lastName;
     }
-    @Override
+
     public StudentCondition getCondition() {
         return studentCondition;
     }
     @Override
-    public  int compareTo(Student other){
-        return this.lastName.compareTo(other.lastName);
+    public  boolean compareTo(Student other){
+        if (this.lastName == other.lastName) return true;
+        else return false;
     }
 
-    @Override
-    public String toString();
 }
 

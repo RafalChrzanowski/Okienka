@@ -1,3 +1,3 @@
 public interface Comparable<Students> {
-    public int compareTo(Student student);
+    public boolean compareTo(Student student);
 }

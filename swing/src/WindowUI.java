@@ -1,61 +1,144 @@
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.AbstractTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class WindowUI {
-    private GradebookManager gradebookManager;
+import java.util.ArrayList;
 
-    private JList<Student> studentsList;
-    private JList<String> gradesList;
-    private JTable studentsTable;
-    private JTextField firstNameField;
-    private JTextField lastNameField;
-    private JTextField gradeField;
-    private JTextField presenceField;
+public class WindowUI extends JFrame {
+    private ArrayList<Student> students = new ArrayList<>();
 
-    public GradebookUI() {
-        this.gradebookManager = new GradebookManager();
+    private JPanel mainPanel;
+    private JLabel firstName;
+    private JTextField firstNameTextField;
+    private JLabel lastName;
+    private JTextField lastNameTextField;
+    private JLabel studentCondition;
 
+    private ButtonGroup group;
+    private StudentCondition selectedCondition;
+    private JLabel yearOfBirth;
+    private JTextField yearOfBirthTextField;
+    private JLabel points;
+    private JTextField pointsTextField;
+    private JLabel email;
+    private JTextField emailTextField;
+    private JButton addButton;
+    private JButton deleteButton;
+    private JButton editButton;
+    private JList<Student> studentJList;
+
+    public WindowUI() {
+        setTitle("Student Manager");
+        setSize(400, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setTitle("Gradebook");
 
-        JPanel contentPane = new JPanel();
-        contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-        setContentPane(contentPane);
-        contentPane.setLayout(new BorderLayout(0, 0));
+        mainPanel = new JPanel();
+        mainPanel.setLayout(new GridLayout(9, 2));
 
-        JPanel studentsPanel = new JPanel();
-        contentPane.add(studentsPanel, BorderLayout.WEST);
-        studentsPanel.setLayout(new BorderLayout(0, 0));
+        firstName = new JLabel("firstName: ");
+        firstNameTextField = new JTextField();
+        lastName = new JLabel("lastName: ");
+        lastNameTextField = new JTextField();
+        studentCondition = new JLabel("studentCondition-nie działa: ");
+        JRadioButton radio1 = new JRadioButton("DOING");
+        JRadioButton radio2 = new JRadioButton("SICK");
+        JRadioButton radio3 = new JRadioButton("ABSENT");
+        yearOfBirth = new JLabel("yearOfBirth: ");
+        yearOfBirthTextField = new JTextField();
+        points = new JLabel("points: ");
+        pointsTextField = new JTextField();
+        email = new JLabel("email: ");
+        emailTextField = new JTextField();
 
-        JLabel studentsLabel = new JLabel("Students");
-        studentsPanel.add(studentsLabel, BorderLayout.NORTH);
+        ButtonGroup radiogroup = new ButtonGroup();
+        radiogroup.add(radio1);
+        radiogroup.add(radio2);
+        radiogroup.add(radio3);
 
-        studentsList = new JList<>();
-        studentsList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        studentsList.setModel(new AbstractListModel<Student>() {
-            @Override
-            public int getSize() {
-                return gradebookManager.getStudents().size();
+        addButton = new JButton("Add");
+        //ToDo
+        addButton.addActionListener(new ActionListener() {
+         @Override
+            public void actionPerformed(ActionEvent e) {
+                String firstName = firstNameTextField.getText();
+                String lastName = lastNameTextField.getText();
+                radio1.setSelected(true);
+                JRadioButton selectedButton = (JRadioButton) radiogroup.getSelection().getSelectedObjects()[0];
+                String Condition = selectedButton.getText();
+                int yearOfBirth = Integer.parseInt(yearOfBirthTextField.getText());
+                double points = Integer.parseInt(pointsTextField.getText());
+                String email = emailTextField.getText();
+                Student student = new Student(firstName, lastName,StudentCondition.valueOf(Condition),yearOfBirth,points,email);
+                students.add(student);
+                updateList();
             }
+        });
 
+        deleteButton = new JButton("Delete");
+        deleteButton.addActionListener(new ActionListener() {
             @Override
-            public Student getElementAt(int index) {
-                return gradebookManager
-    JFrame f;
-    WindowUI(){
-        f=new JFrame();
-        /*String data[][]={ {"101","Amit","670000"},
-                {"102","Jai","780000"},
-                {"101","Sachin","700000"}};
-        String column[]={"ID","NAME","SALARY"};*/
-        JTable jt=new JTable(/*data,column*/);
-        jt.setBounds(30,40,200,300);
-        JScrollPane sp=new JScrollPane(jt);
-        f.add(sp);
-        f.setSize(300,400);
-        f.setVisible(true);
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = studentJList.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    students.remove(selectedIndex);
+                    updateList();
+                }
+            }
+        });
+/*
+        editButton = new JButton("Edit status");
+        editButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int selectedIndex = studentJList.getSelectedIndex();
+                if (selectedIndex != -1) {
+                    String name = nameTextField.getText();
+                    String id = idTextField.getText();
+                    String condi = pointsTextField.getText();
+                    Student student = students.get(selectedIndex);
+                    student.studentCondition(condi);
+                    updateList();
+                }
+            }
+        });
+*/
+        studentJList = new JList<>();
+        studentJList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        JScrollPane listScrollPane = new JScrollPane(studentJList);
+
+        mainPanel.add(firstName);
+        mainPanel.add(firstNameTextField);
+        mainPanel.add(lastName);
+        mainPanel.add(lastNameTextField);
+        mainPanel.add(studentCondition);
+        mainPanel.add(radio1);
+        mainPanel.add(radio2);
+        mainPanel.add(radio3);
+        mainPanel.add(yearOfBirth);
+        mainPanel.add(yearOfBirthTextField);
+        mainPanel.add(points);
+        mainPanel.add(pointsTextField);
+        mainPanel.add(email);
+        mainPanel.add(emailTextField);
+        mainPanel.add(addButton);
+        /*
+        mainPanel.add(deleteButton);
+        mainPanel.add(editButton);
+
+        mainPanel.add(listScrollPane);
+        */
+        add(mainPanel);
+
+        setVisible(true);
     }
+
+    private void updateList() {
+        studentJList.setListData(students.toArray(new Student[0]));
+        firstNameTextField.setText("");
+        lastNameTextField.setText("");
+        yearOfBirthTextField.setText("");
+        pointsTextField.setText("");
+        emailTextField.setText("");
+    }
+
 }

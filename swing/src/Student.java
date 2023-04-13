@@ -31,6 +31,12 @@ public class Student implements Printable, Comparable<Student>{
     public StudentCondition getCondition() {
         return studentCondition;
     }
+    public void setStudentCondition(StudentCondition studentCondition) {
+        this.studentCondition = studentCondition;
+    }
+    public void setPoints(double points) {
+        this.points = points;
+    }
     @Override
     public  boolean compareTo(Student other){
         if (this.lastName == other.lastName) return true;

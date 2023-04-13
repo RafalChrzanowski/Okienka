@@ -113,4 +113,8 @@ public class Class {
     public String getGroupName() {
         return this.groupName;
     }
+    public List<Student> getStudents() {
+        return students;
+    }
+
 }

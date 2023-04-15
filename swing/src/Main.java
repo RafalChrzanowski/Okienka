@@ -12,9 +12,11 @@ public class Main {
 
         new WindowUI();
 
-        Class classInstance = new Class("Group A", 20);
-        classInstance.addStudent(new Student("Tomasz", "Chrzanowski",StudentCondition.SICK,2001,4.0,"rafalchrzanowski@gmail.com"));
-        classInstance.addStudent(new Student("Piotr", "Maka",StudentCondition.ABSENT,2004,2.0,"Maka@gmail.com"));
-        new ClassInterface(classInstance);
+        Class classInstance1 = new Class("Group A", 20);
+        classInstance1.addStudent(new Student("Tomasz", "Chrzanowski", StudentCondition.SICK, 2001, 4.0, "rafalchrzanowski@gmail.com"));
+        classInstance1.addStudent(new Student("Piotr", "Maka", StudentCondition.ABSENT, 2004, 2.0, "Maka@gmail.com"));
+        classInstance1.addStudent(new Student("asdwasdasd", "Maka", StudentCondition.ABSENT, 2004, 2.0, "Maka@gmail.com"));
+
+        new ClassInterface(classInstance1);
     }
 }

@@ -116,5 +116,9 @@ public class Class {
     public List<Student> getStudents() {
         return students;
     }
+    public int getMaxStudents() {
+        return maxStudents;
+    }
+
 
 }

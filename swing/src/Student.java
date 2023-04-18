@@ -62,5 +62,8 @@ public class Student implements Printable, Comparable<Student>{
     public void setEmail(String email) {
         this.email = email;
     }
+    public void setYearOfBirth(int yearOfBirth) {
+        this.yearOfBirth = yearOfBirth;
+    }
 }
 

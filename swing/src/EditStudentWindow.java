@@ -4,12 +4,15 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
 class EditStudentWindow extends JFrame {
     private Student student;
 
     private JTextField firstNameField;
     private JTextField lastNameField;
     private JTextField emailField;
+    private JTextField yearOfBirthField;
+    private JTextField pointsField;
 
     public EditStudentWindow(Student student) {
         this.student = student;
@@ -17,16 +20,15 @@ class EditStudentWindow extends JFrame {
         setTitle("Edit Student");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-        // Create a new JPanel to contain the components
         JPanel contentPane = new JPanel(new BorderLayout());
         setContentPane(contentPane);
 
-        // Create form fields for editing the student data
         firstNameField = new JTextField(student.getFirstName());
         lastNameField = new JTextField(student.getName());
         emailField = new JTextField(student.getEmail());
+        yearOfBirthField = new JTextField(String.valueOf(student.getYearOfBirth()));
+        pointsField = new JTextField(String.valueOf(student.getPoints()));
 
-        // Add form fields to the content pane
         JPanel formPanel = new JPanel(new GridLayout(3, 2));
         formPanel.add(new JLabel("First Name:"));
         formPanel.add(firstNameField);
@@ -34,25 +36,30 @@ class EditStudentWindow extends JFrame {
         formPanel.add(lastNameField);
         formPanel.add(new JLabel("Email:"));
         formPanel.add(emailField);
+        formPanel.add(new JLabel("Year of birth:"));
+        formPanel.add(yearOfBirthField);
+        formPanel.add(new JLabel("Points:"));
+        formPanel.add(pointsField);
         contentPane.add(formPanel, BorderLayout.CENTER);
 
-        // Add a save button to save the edited student data
         JButton saveButton = new JButton("Save");
         saveButton.addActionListener(e -> {
-            // Save the edited student data
             student.setFirstName(firstNameField.getText());
             student.setLastName(lastNameField.getText());
             student.setEmail(emailField.getText());
+            String yearOfBirthStr = yearOfBirthField.getText();
+            int yearOfBirth = Integer.parseInt(yearOfBirthStr);
+            student.setYearOfBirth(yearOfBirth);
+            String pointsStr = pointsField.getText();
+            double points = Double.parseDouble(pointsStr);
+            student.setPoints(points);
 
-            // Update the table to reflect the changes
             ((AbstractTableModel) StudentListTable.studentTable.getModel()).fireTableDataChanged();
 
-            // Close the edit window
             dispose();
         });
         contentPane.add(saveButton, BorderLayout.SOUTH);
 
-        // Set the size of the JFrame and make it visible
         setSize(400, 200);
         setVisible(true);
     }

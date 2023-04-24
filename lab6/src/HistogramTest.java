@@ -30,6 +30,26 @@ public class HistogramTest
             } catch (InterruptedException e) {}
         }
 
-        obraz_1.compare();
+        obraz_1.compareHistogram();
+
+        System.out.println("-------------------------Thread-----------------------------------------");
+        System.out.println("Every row of random charsTab is new Thread");
+        obraz_1.clear_only_parallelHistogram();
+
+        num_threads = n;
+        Thread[] newThr3 = new Thread[num_threads];
+
+        for (int i = 0; i < num_threads; i++)
+        {
+            (newThr3[i] = new Thread(new runnable2(i,obraz_1))).start();
+        }
+        for (int i = 0; i < num_threads; i++) {
+            try {
+                newThr3[i].join();
+            } catch (InterruptedException e) {}
+        }
+
+        obraz_1.print_parallelHistogram();
+        obraz_1.compareHistogram();
     }
 }

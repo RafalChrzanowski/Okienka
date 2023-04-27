@@ -22,6 +22,18 @@ public class Student implements Printable, Comparable<Student>{
         return "Student:\n Imie: %s\n Nazwisko: %s\n Status: %s\n Rok urodzenia: %d\n Punkty: %.2f\n Email: %s\n".formatted(firstName, lastName, studentCondition.toString(), yearOfBirth, points, email);
     }
 
+    @Override
+    public String toString() {
+        return "Student{" +
+                "firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", studentCondition=" + studentCondition +
+                ", yearOfBirth=" + yearOfBirth +
+                ", points=" + points +
+                ", email='" + email + '\'' +
+                '}';
+    }
+
     public String getName() {
         return lastName;
     }

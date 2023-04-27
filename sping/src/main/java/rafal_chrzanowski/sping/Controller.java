@@ -45,11 +45,55 @@ public class Controller {
         else return "This class of student not exist";
     }
 
+/*
+    @GetMapping("/student/{id}/grade")
+    public String getStudentGrade(
+            @PathVariable String id
+    ) {
+        return agh.getAllPoints().toString();
+    }
+*/
     @GetMapping("/course")
     public String getAllClassNames()
     {
         return agh.getAllClassNames().toString();
     }
+    /*
+
+     @RequestMapping("/course/add")
+    public String addClassOfStudents(@RequestParam String className, @RequestParam int max)
+    {
+        return agh.addEmptyClass(className, max);
+    }
+    @RequestMapping("/course/{className}")
+    public String deleteClassOfStudents(@PathVariable String className)
+    {
+        return agh.removeClass(className);
+    }
+    @GetMapping("/course/{className}/students")
+    public String summaryClassOfStudents(@PathVariable String className)
+    {
+        return getClass(className).summary();
+    }
+    @GetMapping("/course/{className}/fill")
+    public String getClassOfStudentsPercentages(@PathVariable String className)
+    {
+        return getClass(className).getPercentages();
+    }
+    private void getCSV(HttpServletResponse response, List<Student> listStudents) throws IOException {
+        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
+        String[] csvHeader = {"Firstname", "Lastname", "Condition", "BirthYear", "Points", "Address"};
+        String[] nameMapping = {"firstName", "lastName", "studentCondition", "birthYear", "numberOfPoint", "studentAddress"};
+        csvWriter.writeHeader(csvHeader);
+
+        for (Student student : listStudents) {
+            csvWriter.write(student, nameMapping);
+        }
+        csvWriter.close();
+    }
+     */
+
+
     @GetMapping("/course/{classname}")
     public String getAllClassNames(@PathVariable String classname)
     {

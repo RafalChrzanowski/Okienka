@@ -133,4 +133,7 @@ public class Klasa {
         }
        return "Delete failed. Student with this lastname doesnt exist";
     }
+    public List<Student> getStudents() {
+        return students;
+    }
 }

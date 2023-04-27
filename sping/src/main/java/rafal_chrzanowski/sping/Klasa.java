@@ -136,4 +136,8 @@ public class Klasa {
     public List<Student> getStudents() {
         return students;
     }
+    String getPercentages()
+    {
+        return Float.toString(((float) students.size()) / maxStudents);
+    }
 }

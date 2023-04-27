@@ -12,7 +12,7 @@ public class ClassContainer {
     public void addClass(String name, int capacity){
         groups.put(name, new Klasa(name, capacity));
     }
-    public void removeClass(String name){
+    public void removeClass2(String name){
         groups.remove(name);
     }
     public List<String> findEmpty(){
@@ -58,4 +58,38 @@ public class ClassContainer {
         });
         return message;
     }
+    String addEmptyClass(String className, int maxNumberOfStudent) {
+        String message;
+        if (groups.containsKey(className)) {
+            System.out.println("Taka klasa jest już w kontenerze");
+            message = "This class is already in container";
+        } else {
+            Klasa newClassOfStudents = new Klasa(className, maxNumberOfStudent);
+            groups.put(className, newClassOfStudents);
+            System.out.printf("Dodano klasę %s do kontenera%n", className);
+            message = "Class added successfully";
+        }
+        return message;
+    }
+    String removeClass(String className) { //Todo
+        String message;
+        if (groups.containsKey(className)) {
+            groups.remove(className);
+            System.out.println("Usunięto klasę z konetenra");
+            message = "Class removed sucessfully";
+        } else {
+            System.out.println("Taka klasa nie jest w kontenerze");
+            message = "This class not exist in container";
+        }
+        return message;
+    }
+    /* //ToDo
+    public String getStudentPoints(String lastname) {
+        if (Exist(lastname)) {
+            return Double.toString(searchedStudent.points);
+        } else {
+            return "Get grade failed. Student with this lastname doesn't exist";
+        }
+    }
+     */
 }

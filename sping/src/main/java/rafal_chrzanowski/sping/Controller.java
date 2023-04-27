@@ -45,12 +45,12 @@ public class Controller {
         else return "This class of student not exist";
     }
 
-/*
-    @GetMapping("/student/{id}/grade")
+/* //ToDo
+    @GetMapping("/student/{lastname}/grade")
     public String getStudentGrade(
-            @PathVariable String id
+            @PathVariable String lastname
     ) {
-        return agh.getAllPoints().toString();
+        return agh.getKlasa(className).getStudentPoints(lastname);
     }
 */
     @GetMapping("/course")
@@ -58,28 +58,35 @@ public class Controller {
     {
         return agh.getAllClassNames().toString();
     }
-    /*
 
-     @RequestMapping("/course/add")
-    public String addClassOfStudents(@RequestParam String className, @RequestParam int max)
-    {
+//http://localhost:8080/api/course/add?className=test&max=8
+    @RequestMapping("/course/add")
+    public String addClassOfStudents(@RequestParam String className, @RequestParam int max) {
         return agh.addEmptyClass(className, max);
     }
+
     @RequestMapping("/course/{className}")
-    public String deleteClassOfStudents(@PathVariable String className)
+    public String deleteClassOfStudents(@PathVariable String className) //ToDo
     {
         return agh.removeClass(className);
     }
+
+
+    //http://localhost:8080/api/course/1/students
     @GetMapping("/course/{className}/students")
     public String summaryClassOfStudents(@PathVariable String className)
     {
-        return getClass(className).summary();
+        return agh.getKlasa(className).summary();
     }
+
+    //http://localhost:8080/api/course/1/fill
     @GetMapping("/course/{className}/fill")
     public String getClassOfStudentsPercentages(@PathVariable String className)
     {
-        return getClass(className).getPercentages();
+        return agh.getKlasa(className).getPercentages();
     }
+    //POST-/api/rating-dodaje ocenę dla przedmiotu/grupy //ToDo
+    /*
     private void getCSV(HttpServletResponse response, List<Student> listStudents) throws IOException {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
         String[] csvHeader = {"Firstname", "Lastname", "Condition", "BirthYear", "Points", "Address"};

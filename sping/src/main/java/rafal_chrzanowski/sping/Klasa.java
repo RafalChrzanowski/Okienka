@@ -140,4 +140,14 @@ public class Klasa {
     {
         return Float.toString(((float) students.size()) / maxStudents);
     }
+
+    public String getStudentPoints(String lastname) {
+        for (Student student : getStudents()) {
+            if (student.getLastname().equals(lastname)) {
+                return Double.toString(student.getPoints());
+            }
+        }
+        return "Get grade failed. Student with this lastname doesn't exist";
+    }
+
 }

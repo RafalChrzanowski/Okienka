@@ -51,5 +51,11 @@ public class Student implements Printable, Comparable<Student>{
         else return false;
     }
 
+    public String getLastname() {
+        return lastName;
+    }
+    public double getPoints() {
+        return points;
+    }
 }
 

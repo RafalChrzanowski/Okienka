@@ -45,14 +45,19 @@ public class Controller {
         else return "This class of student not exist";
     }
 
-/* //ToDo
+ //ToDo
     @GetMapping("/student/{lastname}/grade")
     public String getStudentGrade(
-            @PathVariable String lastname
+         @PathVariable String classname,
+         @PathVariable String lastname
     ) {
-        return agh.getKlasa(className).getStudentPoints(lastname);
+     if (agh.Exist(classname)) {
+         return agh.getKlasa(classname).getStudentPoints(lastname);
+     } else {
+         return "Get grade failed. Class with this name doesn't exist";
+     }
     }
-*/
+    //http://localhost:8080/api/course
     @GetMapping("/course")
     public String getAllClassNames()
     {
@@ -64,11 +69,12 @@ public class Controller {
     public String addClassOfStudents(@RequestParam String className, @RequestParam int max) {
         return agh.addEmptyClass(className, max);
     }
-
-    @RequestMapping("/course/{className}")
-    public String deleteClassOfStudents(@PathVariable String className) //ToDo
+    //http://localhost:8080/api/course/delete/1
+    @RequestMapping("/course/delete/{className}")
+    public String deleteClassOfStudents(@PathVariable String className)
     {
-        return agh.removeClass(className);
+        agh.removeClass(className);
+        return agh.getAllClassNames().toString();
     }
 
 
@@ -85,7 +91,8 @@ public class Controller {
     {
         return agh.getKlasa(className).getPercentages();
     }
-    //POST-/api/rating-dodaje ocenę dla przedmiotu/grupy //ToDo
+    //ToDo
+    //POST-/api/rating-dodaje ocenę dla przedmiotu/grupy
     /*
     private void getCSV(HttpServletResponse response, List<Student> listStudents) throws IOException {
         ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
@@ -107,6 +114,7 @@ public class Controller {
         return agh.getKlasa(classname).summary();
     }
     @GetMapping("/allStudents")
+
     public StringBuilder getAllStudents()
     {
         return agh.getAllStudents();

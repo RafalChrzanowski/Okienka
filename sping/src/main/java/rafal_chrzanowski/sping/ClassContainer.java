@@ -83,13 +83,20 @@ public class ClassContainer {
         }
         return message;
     }
-    /* //ToDo
-    public String getStudentPoints(String lastname) {
-        if (Exist(lastname)) {
-            return Double.toString(searchedStudent.points);
+    public List<Student> getStudents(String klasa) {
+        if (Exist(klasa)) {
+            return getKlasa(klasa).getStudents();
         } else {
-            return "Get grade failed. Student with this lastname doesn't exist";
+            return null;
         }
     }
-     */
+    public String getStudentPoints(String lastname) {
+        for (Student student : getStudents(getAllClassNames().toString())) {
+            if (student.getLastname().equals(lastname)) {
+                return Double.toString(student.getPoints());
+            }
+        }
+        return "Get grade failed. Student with this lastname doesn't exist";
+    }
+
 }

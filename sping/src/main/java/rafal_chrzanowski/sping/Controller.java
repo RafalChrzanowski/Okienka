@@ -45,8 +45,8 @@ public class Controller {
         else return "This class of student not exist";
     }
 
- //ToDo
-    @GetMapping("/student/{lastname}/grade")
+ //http://localhost:8080/api/student/1/Kiepa/grade
+    @GetMapping("/student/{classname}/{lastname}/grade")
     public String getStudentGrade(
          @PathVariable String classname,
          @PathVariable String lastname
@@ -91,21 +91,6 @@ public class Controller {
     {
         return agh.getKlasa(className).getPercentages();
     }
-    //ToDo
-    //POST-/api/rating-dodaje ocenę dla przedmiotu/grupy
-    /*
-    private void getCSV(HttpServletResponse response, List<Student> listStudents) throws IOException {
-        ICsvBeanWriter csvWriter = new CsvBeanWriter(response.getWriter(), CsvPreference.STANDARD_PREFERENCE);
-        String[] csvHeader = {"Firstname", "Lastname", "Condition", "BirthYear", "Points", "Address"};
-        String[] nameMapping = {"firstName", "lastName", "studentCondition", "birthYear", "numberOfPoint", "studentAddress"};
-        csvWriter.writeHeader(csvHeader);
-
-        for (Student student : listStudents) {
-            csvWriter.write(student, nameMapping);
-        }
-        csvWriter.close();
-    }
-     */
 
 
     @GetMapping("/course/{classname}")
